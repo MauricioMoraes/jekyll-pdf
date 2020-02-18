@@ -1,4 +1,5 @@
 require 'pdfkit'
+require 'pathname'
 require File.dirname(__FILE__) + '/helper.rb'
 
 module Jekyll
@@ -100,7 +101,7 @@ module Jekyll
       end
 
       def topic_dir(this_file)
-        File.dirname(this_file) + "../../"
+        File.join(Pathname(this_file).dirname.each_filename.to_a[-3, 2])
       end
     end
   end
