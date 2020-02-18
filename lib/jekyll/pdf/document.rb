@@ -17,7 +17,7 @@ module Jekyll
 
         process(@name)
         @page = page
-        self.data = page.data #.clone
+        self.data = page.data
 
         # Set layout to the PDF layout
         data['layout'] = layout
@@ -94,6 +94,10 @@ module Jekyll
         end
 
         layout || 'pdf'
+      end
+
+      def topic_dir
+        @site.url + File.dirname(path) + "../../"
       end
     end
   end
