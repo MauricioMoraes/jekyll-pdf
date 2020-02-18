@@ -17,7 +17,7 @@ module Jekyll
 
         process(@name)
         @page = page
-        self.data = page.data.clone
+        self.data = page.data #.clone
 
         # Set layout to the PDF layout
         data['layout'] = layout
