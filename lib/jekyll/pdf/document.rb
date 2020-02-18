@@ -6,6 +6,8 @@ module Jekyll
     class Document < Jekyll::Page
       include Helper
 
+      attr_reader :topicdir
+
       def initialize(site, base, page)
         #site.config['baseurl'] = ''
         @site = site
@@ -14,6 +16,7 @@ module Jekyll
         @name = File.basename(page.url, File.extname(page.url)) + '.pdf'
         @settings = site.config.key?('pdf') ? site.config['pdf'].clone : {}
         @partials = %w[cover header_html footer_html]
+        @topicdir = topic_dir(base)
 
         process(@name)
         @page = page
@@ -96,8 +99,8 @@ module Jekyll
         layout || 'pdf'
       end
 
-      def topic_dir
-        @site.url + File.dirname(path) + "../../"
+      def topic_dir(this_file)
+        File.dirname(this_file) + "../../"
       end
     end
   end
