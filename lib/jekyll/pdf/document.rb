@@ -6,8 +6,6 @@ module Jekyll
     class Document < Jekyll::Page
       include Helper
 
-      attr_reader :topicdir
-
       def initialize(site, base, page)
         #site.config['baseurl'] = ''
         @site = site
@@ -16,7 +14,6 @@ module Jekyll
         @name = File.basename(page.url, File.extname(page.url)) + '.pdf'
         @settings = site.config.key?('pdf') ? site.config['pdf'].clone : {}
         @partials = %w[cover header_html footer_html]
-        @topicdir = topic_dir(base)
 
         process(@name)
         @page = page
@@ -31,6 +28,9 @@ module Jekyll
         PDFKit.configure do |config|
           config.verbose = site.config['verbose']
         end
+
+        # Set the topic directory
+        page.data['topicdir'] = topic_dir(base)
 
         # Set pdf_url variable in the source page (for linking to the PDF version)
         page.data['pdf_url'] = url
