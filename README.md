@@ -11,7 +11,7 @@ Dynamically generate PDFs from Jekyll pages, posts &amp; documents.
 Add `gem "jekyll-pdf"` to your `Gemfile` and run `bundle`, then add `jekyll-pdf` to your `_config.yml` like so:
 
 ```yaml
-gems:
+plugins:
   - jekyll-pdf
 ```
 
